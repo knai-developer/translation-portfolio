@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Knai Translations — English ⇄ Urdu Translation Portfolio</title>
+<meta name="description" content="Knai Translations — English to Urdu and Urdu to English translation, app localisation, UI copy, terminology tables and bilingual glossaries." />
+<meta name="theme-color" content="#070b16" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Noto+Naskh+Arabic:wght@500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink:   { 900:'#05070f', 800:'#070b16', 700:'#0b1120', 600:'#111a2e' },
+          brand: { DEFAULT:'#22d3ee', 2:'#818cf8', 3:'#f472b6' },
+        },
+        fontFamily: {
+          display: ['Sora','sans-serif'],
+          body: ['Inter','sans-serif'],
+          urdu: ['Noto Naskh Arabic','serif'],
+        },
+        boxShadow: {
+          glow: '0 0 40px -8px rgba(34,211,238,.45)',
+          'glow-lg': '0 0 90px -10px rgba(129,140,248,.55)',
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+:root{
+  --c1:#22d3ee; --c2:#818cf8; --c3:#f472b6;
+  --grad: linear-gradient(120deg,var(--c1),var(--c2) 55%,var(--c3));
+  --card: rgba(255,255,255,.045);
+  --line: rgba(255,255,255,.10);
+  --txt:#e8edf7; --mut:#93a1bd;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:#05070f; color:var(--txt);
+  font-family:'Inter',sans-serif; overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+body::-webkit-scrollbar{width:9px}
+body::-webkit-scrollbar-track{background:#070b16}
+body::-webkit-scrollbar-thumb{background:linear-gradient(var(--c1),var(--c2));border-radius:9px}
+::selection{background:rgba(34,211,238,.3);color:#fff}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+
+/* ============ PRELOADER ============ */
+#preloader{
+  position:fixed;inset:0;z-index:99999;background:#05070f;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.4rem;
+  transition:opacity .6s ease, visibility .6s ease;
+}
+#preloader.done{opacity:0;visibility:hidden}
+.pl-ring{
+  width:78px;height:78px;border-radius:50%;padding:4px;
+  background:conic-gradient(from 0deg,var(--c1),var(--c2),var(--c3),var(--c1));
+  animation:spin 1s linear infinite;
+  box-shadow:0 0 40px rgba(34,211,238,.35);
+}
+.pl-ring>div{width:100%;height:100%;border-radius:50%;background:#05070f}
+.pl-txt{font-family:'Sora';letter-spacing:.32em;font-size:.72rem;color:var(--mut);text-transform:uppercase}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ============ CURSOR ============ */
+.cur,.cur-dot{position:fixed;top:0;left:0;pointer-events:none;z-index:99998;transform:translate(-50%,-50%)}
+.cur{width:26px;height:26px;border:2px solid var(--c1);border-radius:50%;transition:width .25s,height .25s,background .25s,border-color .25s}
+.cur.hot{width:52px;height:52px;background:rgba(34,211,238,.14);border-color:var(--c3)}
+.cur-dot{width:5px;height:5px;background:var(--c1);border-radius:50%}
+@media(hover:none){.cur,.cur-dot{display:none}}
+
+/* ============ SCROLL PROGRESS ============ */
+#prog{position:fixed;top:0;left:0;height:3px;width:0;background:var(--grad);z-index:9997;box-shadow:0 0 14px rgba(34,211,238,.7)}
+
+/* ============ NAV ============ */
+#nav{position:fixed;top:0;left:0;right:0;z-index:9996;transition:all .4s cubic-bezier(.4,0,.2,1);padding:1.1rem 0}
+#nav.solid{
+  background:rgba(7,11,22,.82);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);padding:.55rem 0;box-shadow:0 10px 40px -20px #000;
+}
+.navlink{position:relative;font-size:.9rem;font-weight:500;color:var(--mut);transition:color .25s;padding:.25rem 0}
+.navlink::after{
+  content:'';position:absolute;left:0;bottom:-2px;height:2px;width:0;
+  background:var(--grad);transition:width .32s cubic-bezier(.4,0,.2,1);border-radius:2px;
+}
+.navlink:hover,.navlink.on{color:#fff}
+.navlink:hover::after,.navlink.on::after{width:100%}
+.brand-dot{width:9px;height:9px;border-radius:50%;background:var(--grad);box-shadow:0 0 14px var(--c1);animation:pulseD 1.8s infinite}
+@keyframes pulseD{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.45);opacity:.55}}
+#burger span{display:block;height:2px;width:24px;background:#fff;border-radius:2px;transition:.3s}
+#burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+#burger.open span:nth-child(2){opacity:0}
+#burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ============ BUTTONS ============ */
+.btn{position:relative;display:inline-flex;align-items:center;gap:.55rem;overflow:hidden;border-radius:999px;font-weight:600;transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s}
+.btn-grad{background:var(--grad);color:#05070f;padding:.85rem 1.9rem}
+.btn-grad::before{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 20%,rgba(255,255,255,.75),transparent 80%);transform:translateX(-130%);transition:transform .65s}
+.btn-grad:hover::before{transform:translateX(130%)}
+.btn-grad:hover{transform:translateY(-4px) scale(1.04);box-shadow:0 18px 45px -14px rgba(34,211,238,.8)}
+.btn-ghost{border:1.5px solid var(--line);padding:.85rem 1.9rem;color:#fff;background:rgba(255,255,255,.03)}
+.btn-ghost:hover{transform:translateY(-4px);border-color:var(--c1);background:rgba(34,211,238,.1);box-shadow:0 14px 38px -18px rgba(34,211,238,.9)}
+.soc{width:44px;height:44px;display:grid;place-items:center;border-radius:14px;border:1px solid var(--line);background:var(--card);transition:.32s cubic-bezier(.34,1.56,.64,1)}
+.soc:hover{transform:translateY(-6px) rotate(-8deg);border-color:var(--c1);background:rgba(34,211,238,.12);box-shadow:0 12px 28px -12px rgba(34,211,238,.9)}
+
+/* ============ TEXT ============ */
+.grad-t{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.grad-anim{background:300% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:grad 7s ease infinite}
+@keyframes grad{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.urdu{font-family:'Noto Naskh Arabic',serif;direction:rtl}
+
+/* ============ BACKGROUNDS ============ */
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5;pointer-events:none;z-index:0}
+.b1{width:520px;height:520px;background:#0ea5e9;top:-160px;left:-120px;animation:float 18s ease-in-out infinite}
+.b2{width:460px;height:460px;background:#7c3aed;top:20%;right:-140px;animation:float 22s ease-in-out infinite reverse}
+.b3{width:400px;height:400px;background:#ec4899;bottom:-140px;left:35%;animation:float 26s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(70px,-60px) scale(1.13)}66%{transform:translate(-60px,50px) scale(.92)}}
+.grid-bg{
+  position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.35;
+  background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+  background-size:56px 56px;
+  mask-image:radial-gradient(ellipse 80% 60% at 50% 40%,#000 40%,transparent 100%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 40%,#000 40%,transparent 100%);
+}
+#stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* ============ MARQUEE ============ */
+.marq{overflow:hidden;position:relative;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.marq-track{display:flex;gap:3rem;width:max-content;animation:slide 26s linear infinite}
+.marq:hover .marq-track{animation-play-state:paused}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* ============ TILT CARD ============ */
+.tilt{transform-style:preserve-3d;transition:transform .18s ease-out,box-shadow .4s,border-color .4s}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:22px;
+  backdrop-filter:blur(10px);position:relative;overflow:hidden;
+  transition:transform .4s cubic-bezier(.34,1.56,.64,1),border-color .4s,box-shadow .4s;
+}
+.card::before{
+  content:'';position:absolute;inset:0;border-radius:22px;padding:1px;
+  background:var(--grad);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+  opacity:0;transition:opacity .4s;pointer-events:none;
+}
+.card:hover::before{opacity:1}
+.card:hover{transform:translateY(-12px);border-color:transparent;box-shadow:0 30px 70px -28px rgba(34,211,238,.5)}
+.card-glow{
+  position:absolute;width:280px;height:280px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(34,211,238,.16),transparent 68%);
+  opacity:0;transition:opacity .35s;z-index:3;
+}
+.card:hover .card-glow{opacity:1}
+
+/* ============ REVEAL ============ */
+.rv{opacity:0;transform:translateY(42px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+.rv-l{opacity:0;transform:translateX(-48px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.rv-l.in{opacity:1;transform:none}
+.rv-r{opacity:0;transform:translateX(48px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.rv-r.in{opacity:1;transform:none}
+.rv-z{opacity:0;transform:scale(.86);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.rv-z.in{opacity:1;transform:none}
+
+/* ============ MISC ============ */
+.chip{display:inline-flex;align-items:center;gap:.4rem;font-size:.72rem;font-weight:600;padding:.28rem .7rem;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.04)}
+.flt{animation:fl 4.5s ease-in-out infinite}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.ring{position:absolute;inset:0;border-radius:50%;padding:4px;background:conic-gradient(from 0deg,var(--c1),var(--c2),var(--c3),var(--c1));animation:spin 8s linear infinite}
+.ring>i{display:block;width:100%;height:100%;border-radius:50%;background:#070b16}
+.sec{padding:clamp(4.5rem,9vw,8rem) 0;position:relative;z-index:2}
+.eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--c1);font-weight:700;margin-bottom:1rem}
+.eyebrow::before{content:'';width:34px;height:2px;background:var(--grad);border-radius:2px}
+.h2{font-family:'Sora';font-weight:800;font-size:clamp(1.9rem,4.4vw,3.1rem);line-height:1.12}
+.skill-bar{height:6px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+.skill-bar>i{display:block;height:100%;width:0;border-radius:99px;background:var(--grad);transition:width 1.4s cubic-bezier(.16,1,.3,1)}
+.filt{padding:.55rem 1.25rem;border-radius:999px;font-size:.85rem;font-weight:600;border:1px solid var(--line);color:var(--mut);transition:.3s cubic-bezier(.34,1.56,.64,1);background:rgba(255,255,255,.03)}
+.filt:hover{transform:translateY(-3px);color:#fff;border-color:var(--c1)}
+.filt.on{background:var(--grad);color:#05070f;border-color:transparent;box-shadow:0 12px 30px -14px rgba(34,211,238,.9)}
+.pf{overflow:hidden;border-radius:16px;position:relative;background:#0b1120}
+.pf img,.pf video{width:100%;height:230px;object-fit:cover;transition:transform .8s cubic-bezier(.16,1,.3,1)}
+.card:hover .pf img{transform:scale(1.11)}
+.pf .veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,7,15,.95),rgba(5,7,15,.25) 55%,transparent);opacity:0;transition:opacity .45s;display:flex;flex-direction:column;justify-content:flex-end;padding:1rem;gap:.6rem}
+.card:hover .pf .veil{opacity:1}
+.sm-btn{display:inline-flex;align-items:center;gap:.4rem;font-size:.76rem;font-weight:700;padding:.5rem .95rem;border-radius:10px;background:var(--grad);color:#05070f;transition:.28s}
+.sm-btn:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 12px 26px -12px rgba(34,211,238,.9)}
+.sm-btn.v{background:transparent;border:1px solid rgba(255,255,255,.3);color:#fff}
+.stat-n{font-family:'Sora';font-weight:800;font-size:clamp(1.9rem,4vw,2.7rem);background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hid{opacity:0!important;visibility:hidden}
+.tl-dot{width:15px;height:15px;border-radius:50%;background:var(--grad);flex:none;margin-top:5px;box-shadow:0 0 0 4px rgba(34,211,238,.14)}
+.tl-line{position:absolute;left:7px;top:14px;bottom:-14px;width:2px;background:linear-gradient(var(--grad),transparent)}
+.acc{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.16,1,.3,1)}
+.acc.open{max-height:340px}
+.acc-i{max-height:0;overflow:hidden;transition:max-height .45s ease,opacity .3s;opacity:0}
+.acc-i.open{max-height:200px;opacity:1}
+#top{position:fixed;bottom:26px;right:26px;z-index:9995;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:var(--grad);color:#05070f;opacity:0;visibility:hidden;transform:translateY(20px);transition:.4s cubic-bezier(.34,1.56,.64,1);box-shadow:0 14px 34px -14px rgba(34,211,238,.9)}
+#top.show{opacity:1;visibility:visible;transform:none}
+#top:hover{transform:translateY(-5px) scale(1.09)}
+.spin-on-hover:hover svg{animation:spin 1s linear infinite}
+.prog-ring{transition:stroke-dashoffset 1.6s cubic-bezier(.16,1,.3,1)}
+.lb{position:fixed;inset:0;z-index:99999;background:rgba(3,5,11,.94);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:5vh 5vw;opacity:0;visibility:hidden;transition:.35s}
+.lb.open{opacity:1;visibility:visible}
+.lb img{max-width:100%;max-height:90vh;border-radius:18px;box-shadow:0 40px 120px -30px rgba(34,211,238,.55);transform:scale(.9) translateY(20px);transition:.45s cubic-bezier(.16,1,.3,1)}
+.lb.open img{transform:none}
+.lb-x,.lb-n{position:absolute;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.08);border:1px solid var(--line);color:#fff;font-size:18px;transition:.3s}
+.lb-x{top:26px;right:26px}
+.lb-n{top:50%;transform:translateY(-50%)}
+.lb-n.p{left:24px} .lb-n.n{right:24px}
+.lb-x:hover,.lb-n:hover{background:var(--grad);color:#05070f;transform:translateY(-50%) scale(1.1)}
+.lb-x:hover{transform:scale(1.1)}
+.lb-cap{position:absolute;bottom:24px;left:0;right:0;text-align:center;font-family:'Sora';font-weight:600;font-size:.9rem;padding:0 20px}
+@media(max-width:768px){.cur,.cur-dot{display:none}}
+</style>
+</head>
+
+<body class="font-body">
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="pl-ring"><div></div></div>
+  <div class="pl-txt">Loading Portfolio</div>
+</div>
+
+<!-- CURSOR -->
+<div class="cur" id="cur"></div>
+<div class="cur-dot" id="curDot"></div>
+
+<!-- SCROLL PROGRESS -->
+<div id="prog"></div>
+
+<!-- BACKGROUNDS -->
+<canvas id="stars"></canvas>
+<div class="grid-bg"></div>
+
+<!-- NAV -->
+<header id="nav">
+  <div class="max-w-7xl mx-auto px-5 md:px-10 flex items-center justify-between">
+    <a href="#home" class="flex items-center gap-2.5">
+      <span class="brand-dot"></span>
+      <span class="font-display font-extrabold text-lg tracking-tight">Knai<span class="grad-t"> Translations</span></span>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-8">
+      <a href="#home"     class="navlink">Home</a>
+      <a href="#about"    class="navlink">About</a>
+      <a href="#services" class="navlink">Services</a>
+      <a href="#projects" class="navlink">Projects</a>
+      <a href="#stack"    class="navlink">Skills</a>
+      <a href="#journey"  class="navlink">Journey</a>
+      <a href="#faq"      class="navlink">FAQ</a>
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <a href="mailto:arshmanedu123@gmail.com?subject=Translation%20Project%20Enquiry" class="btn btn-grad text-sm hidden sm:inline-flex">Hire Me <i class="fa-solid fa-arrow-right text-xs"></i></a>
+      <button id="burger" class="md:hidden w-11 h-11 grid place-content-center gap-[5px] rounded-xl border border-white/10 bg-white/5" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- MOBILE MENU -->
+  <div id="mMenu" class="md:hidden overflow-hidden transition-all duration-500" style="max-height:0">
+    <div class="max-w-7xl mx-auto px-5 pt-4 pb-6 flex flex-col gap-1">
+      <a href="#home" class="mob-link py-3 px-4 rounded-xl hover:bg-white/5 transition">Home</a>
+      <a href="#about" class="mob-link py-3 px-4 rounded-xl hover:bg-white/5 transition">About</a>
+      <a href="#services" class="mob-link py-3 px-4 rounded-xl hover:bg-white/5 transition">Services</a>
+      <a href="#projects" class="mob-link py-3 px-4 rounded-xl hover:bg-white/5 transition">Projects</a>
+      <a href="#stack" class="mob-link py-3 px-4 rounded-xl hover:bg-white/5 transition">Skills</a>
+      <a href="#journey" class="mob-link py-3 px-4 rounded-xl hover:bg-white/5 transition">Journey</a>
+      <a href="#faq" class="mob-link py-3 px-4 rounded-xl hover:bg-white/5 transition">FAQ</a>
+      <a href="mailto:arshmanedu123@gmail.com?subject=Translation%20Project%20Enquiry" class="mob-link mt-2 py-3 px-4 rounded-xl text-center font-bold text-ink" style="background:var(--grad)">Hire Me</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="home" class="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden">
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-5 md:px-10 grid lg:grid-cols-2 gap-14 items-center w-full">
+    <div>
+      <div class="rv inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-white/10 bg-white/5 mb-7">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+        <span class="text-brand text-sm font-semibold">Available for Translation &amp; Localisation Projects</span>
+      </div>
+
+      <p class="rv font-display font-semibold mb-2 grad-anim" style="font-size:clamp(1.3rem,3vw,1.9rem)">Hello, I'm</p>
+      <h1 class="rv font-display font-extrabold mb-4 leading-[1.05]" style="font-size:clamp(2.6rem,7.5vw,5.4rem)">
+        Knai <span class="grad-anim">Translations</span>
+      </h1>
+
+      <div class="rv font-display font-semibold text-brand-2 mb-6 flex items-center gap-2 flex-wrap" style="font-size:clamp(1rem,2.4vw,1.35rem)">
+        <i class="fa-solid fa-code text-brand"></i><span id="tw"></span><span class="w-[3px] h-[1.2em] bg-brand-2 inline-block tw-caret"></span>
+      </div>
+
+      <p class="rv text-mut max-w-xl leading-relaxed mb-4">
+        I translate between <span class="text-white font-medium">English and Urdu</span> — apps, websites, product copy and technical content — keeping the meaning, the tone and the terminology intact on both sides.
+      </p>
+      <p class="rv text-mut max-w-xl leading-relaxed mb-9">
+        My work spans app localisation, payment and fintech copy, UI strings, security and system alerts, long-form editorial translation and reusable bilingual glossaries — assisted by AI translation agents and finished with human proofreading.
+      </p>
+
+      <div class="rv flex flex-wrap gap-4 mb-9">
+        <a href="#projects" class="btn btn-grad">View My Work <i class="fa-solid fa-arrow-down text-xs"></i></a>
+        <a href="#contact" class="btn btn-ghost">Let's Talk <i class="fa-solid fa-paper-plane text-xs"></i></a>
+      </div>
+
+      <div class="rv flex items-center gap-4 flex-wrap">
+        <a href="mailto:arshmanedu123@gmail.com" class="soc" aria-label="Email"><i class="fa-solid fa-envelope" style="color:#f472b6"></i></a>
+        <a href="mailto:arshmanedu123@gmail.com" class="text-sm md:text-base font-medium text-mut hover:text-white transition break-all">arshmanedu123@gmail.com</a>
+      </div>
+    </div>
+
+    <!-- PROFILE -->
+    <div class="rv-z relative flex flex-col items-center gap-9">
+      <div class="relative fl" style="width:min(300px,72vw);aspect-ratio:1">
+        <div class="ring"><i></i></div>
+        <img src="about.png" alt="Knai Translations"
+             onerror="this.src='https://ui-avatars.com/api/?name=Knai+Translations&size=400&background=0ea5e9&color=fff&font-size=0.4'"
+             class="absolute rounded-full object-cover" style="inset:10px;width:calc(100% - 20px);height:calc(100% - 20px)" />
+        <div class="absolute -top-2 -left-3 chip fl" style="animation-delay:.4s"><i class="fa-solid fa-language text-brand"></i> English</div>
+        <div class="absolute top-1/2 -right-5 chip fl" style="animation-delay:.9s"><i class="fa-solid fa-robot text-brand-2"></i> AI Agents</div>
+        <div class="absolute -bottom-3 right-4 chip fl" style="animation-delay:1.4s"><i class="fa-solid fa-language text-brand"></i> EN ⇄ UR</div>
+      </div>
+
+      <div class="grid grid-cols-3 gap-3 w-full max-w-sm">
+        <div class="card p-4 text-center"><div class="stat-n" data-c="40">0</div><p class="text-xs text-mut mt-1">Jobs Done</p></div>
+        <div class="card p-4 text-center"><div class="stat-n" data-c="2">0</div><p class="text-xs text-mut mt-1">Languages</p></div>
+        <div class="card p-4 text-center"><div class="stat-n" data-c="24">0</div><p class="text-xs text-mut mt-1">Hour Reply</p></div>
+      </div>
+    </div>
+  </div>
+
+  <a href="#about" class="absolute left-1/2 -translate-x-1/2 bottom-7 z-10 flex flex-col items-center gap-2 text-mut hover:text-white transition">
+    <span class="text-[.65rem] tracking-[.3em] uppercase">Scroll</span>
+    <span class="w-[22px] h-9 rounded-full border border-white/20 grid justify-center pt-2">
+      <span class="w-[3px] h-2 rounded-full bg-brand animate-y"></span>
+    </span>
+  </a>
+</section>
+
+<!-- MARQUEE -->
+<div class="relative z-10 border-y border-white/10 py-5 bg-white/[.02]">
+  <div class="marq">
+    <div class="marq-track">
+      <span class="text-mut font-display font-bold text-lg md:text-xl whitespace-nowrap">English ⟶ Urdu ⟶ Urdu ⟶ English ✦ App Localisation ✦ UI Strings ✦ Fintech Copy ✦ Technical Docs ✦ Security Alerts ✦ Glossaries ✦ Terminology ✦ Proofreading ✦ Native Tone ✦ ✦</span>
+      <span class="text-mut font-display font-bold text-lg md:text-xl whitespace-nowrap">English ⟶ Urdu ⟶ Urdu ⟶ English ✦ App Localisation ✦ UI Strings ✦ Fintech Copy ✦ Technical Docs ✦ Security Alerts ✦ Glossaries ✦ Terminology ✦ Proofreading ✦ Native Tone ✦ ✦</span>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="sec">
+  <div class="max-w-7xl mx-auto px-5 md:px-10">
+    <div class="grid lg:grid-cols-2 gap-14 items-center">
+      <div class="rv-l">
+        <span class="eyebrow">About Me</span>
+        <h2 class="h2 mb-6">Two Languages, <span class="grad-t">One Message</span></h2>
+        <p class="text-mut leading-relaxed mb-4">
+          Knai Translations is an English&#8596;Urdu translation and localisation service. We convert content between English and Urdu without losing its meaning: the same warmth, the same formality, the same intent — just in the language the reader actually thinks in.</p>
+        <p class="text-mut leading-relaxed mb-6">
+          My work spans app and website localisation, payment and fintech copy, UI strings, security alerts, long-form editorial and reusable bilingual glossaries. I use AI translation agents for speed and consistency, then proofread every line by hand — because machine-translated Urdu often reads like Urdu, but doesn't <em>feel</em> like it.
+        </p>
+
+        <div class="grid sm:grid-cols-2 gap-4 mb-8">
+          <div class="card p-5 rv">
+            <i class="fa-solid fa-language text-brand text-xl mb-3"></i>
+            <h4 class="font-display font-semibold mb-1">EN → UR Translation</h4>
+            <p class="text-xs text-mut leading-relaxed">English content turned into pure, natural Urdu — short, friendly app copy that reads like it was written in Urdu first.</p>
+          </div>
+          <div class="card p-5 rv" style="transition-delay:.1s">
+            <i class="fa-solid fa-right-left text-brand-2 text-xl mb-3"></i>
+            <h4 class="font-display font-semibold mb-1">UR → EN Translation</h4>
+            <p class="text-xs text-mut leading-relaxed">Urdu translated back into clear, natural English — idiomatic, correct and ready for international audiences.</p>
+          </div>
+          <div class="card p-5 rv" style="transition-delay:.2s">
+            <i class="fa-solid fa-mobile-screen text-brand-3 text-xl mb-3"></i>
+            <h4 class="font-display font-semibold mb-1">App &amp; UI Localisation</h4>
+            <p class="text-xs text-mut leading-relaxed">Interface strings, notifications and micro-copy localised with right-to-left Urdu support in mind.</p>
+          </div>
+          <div class="card p-5 rv" style="transition-delay:.3s">
+            <i class="fa-solid fa-book text-emerald-400 text-xl mb-3"></i>
+            <h4 class="font-display font-semibold mb-1">Terminology &amp; Glossaries</h4>
+            <p class="text-xs text-mut leading-relaxed">Reusable word lists and term banks so every translation in a project stays perfectly consistent.</p>
+          </div>
+        </div>
+
+        <a href="#projects" class="btn btn-grad">See My Translations <i class="fa-solid fa-arrow-right text-xs"></i></a>
+      </div>
+
+      <div class="rv-r relative">
+        <div class="card p-6 md:p-8">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12 rounded-xl grid place-items-center text-lg" style="background:var(--grad);color:#05070f"><i class="fa-solid fa-user"></i></div>
+            <div>
+              <h3 class="font-display font-bold text-lg">Knai Translations</h3>
+              <p class="text-brand text-sm">English &#8596; Urdu Translation &amp; Localisation Service</p>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div class="flex gap-4 items-start">
+              <div class="w-11 h-11 rounded-xl grid place-items-center bg-brand/12 text-brand shrink-0"><i class="fa-solid fa-location-dot"></i></div>
+              <div><h4 class="font-semibold text-sm">Location</h4><p class="text-xs text-mut">Pakistan · Working worldwide</p></div>
+            </div>
+            <div class="flex gap-4 items-start">
+              <div class="w-11 h-11 rounded-xl grid place-items-center bg-brand-2/12 text-brand-2 shrink-0"><i class="fa-solid fa-right-left"></i></div>
+              <div><h4 class="font-semibold text-sm">Language Pairs</h4><p class="text-xs text-mut">English &#8596; Urdu · Urdu &#8596; English</p></div>
+            </div>
+            <div class="flex gap-4 items-start">
+              <div class="w-11 h-11 rounded-xl grid place-items-center bg-brand-3/12 text-brand-3 shrink-0"><i class="fa-solid fa-briefcase"></i></div>
+              <div><h4 class="font-semibold text-sm">Experience</h4><p class="text-xs text-mut">3+ years · 40+ translation &amp; localisation jobs</p></div>
+            </div>
+            <div class="flex gap-4 items-start">
+              <div class="w-11 h-11 rounded-xl grid place-items-center bg-emerald-400/12 text-emerald-400 shrink-0"><i class="fa-solid fa-check-double"></i></div>
+              <div><h4 class="font-semibold text-sm">Quality Control</h4><p class="text-xs text-mut">AI draft → human proofreading → final delivery</p></div>
+            </div>
+          </div>
+
+          <div class="mt-7 pt-6 border-t border-white/10">
+            <div class="flex flex-wrap gap-2">
+              <span class="chip"><i class="fa-solid fa-language text-brand"></i> Translation</span>
+              <span class="chip"><i class="fa-solid fa-mobile-screen text-brand-2"></i> Localisation</span>
+              <span class="chip"><i class="fa-solid fa-robot text-brand-3"></i> AI Agents</span>
+              <span class="chip"><i class="fa-solid fa-magnifying-glass text-emerald-400"></i> Proofreading</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="sec">
+  <div class="max-w-7xl mx-auto px-5 md:px-10">
+    <div class="text-center mb-14 rv">
+      <span class="eyebrow">What I Offer</span>
+      <h2 class="h2">Translation Services <span class="grad-t">I Provide</span></h2>
+      <p class="text-mut mt-4 max-w-2xl mx-auto">From a single paragraph to a full product localisation — accurate, natural, and consistent every time.</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" data-tilt>
+      <div class="card rv tilt p-7">
+        <div class="card-glow"></div>
+        <div class="w-14 h-14 rounded-2xl grid place-items-center text-xl mb-5" style="background:linear-gradient(135deg,rgba(34,211,238,.2),rgba(129,140,248,.2));color:#22d3ee"><i class="fa-solid fa-arrow-right-long"></i></div>
+        <h3 class="font-display font-semibold text-lg mb-2">English to Urdu</h3>
+        <p class="text-sm text-mut leading-relaxed mb-4">Natural, idiomatic Urdu translations that keep the original tone — never stiff literal word-for-word output.</p>
+        <div class="flex flex-wrap gap-2"><span class="chip">EN → UR</span><span class="chip">Natural Tone</span><span class="chip">Idiomatic</span></div>
+      </div>
+
+      <div class="card rv tilt p-7" style="transition-delay:.08s">
+        <div class="card-glow"></div>
+        <div class="w-14 h-14 rounded-2xl grid place-items-center text-xl mb-5" style="background:linear-gradient(135deg,rgba(129,140,248,.2),rgba(244,114,182,.2));color:#818cf8"><i class="fa-solid fa-arrow-left-long"></i></div>
+        <h3 class="font-display font-semibold text-lg mb-2">Urdu to English</h3>
+        <p class="text-sm text-mut leading-relaxed mb-4">Urdu rendered into clear, professional English that international readers understand instantly.</p>
+        <div class="flex flex-wrap gap-2"><span class="chip">UR → EN</span><span class="chip">Clarity</span><span class="chip">Business Tone</span></div>
+      </div>
+
+      <div class="card rv tilt p-7" style="transition-delay:.16s">
+        <div class="card-glow"></div>
+        <div class="w-14 h-14 rounded-2xl grid place-items-center text-xl mb-5" style="background:linear-gradient(135deg,rgba(244,114,182,.2),rgba(34,211,238,.2));color:#f472b6"><i class="fa-solid fa-mobile-screen"></i></div>
+        <h3 class="font-display font-semibold text-lg mb-2">App &amp; UI Localisation</h3>
+        <p class="text-sm text-mut leading-relaxed mb-4">Buttons, labels, notifications and flows translated and checked for RTL Urdu layout.</p>
+        <div class="flex flex-wrap gap-2"><span class="chip">UI Strings</span><span class="chip">RTL</span><span class="chip">Notifications</span></div>
+      </div>
+
+      <div class="card rv tilt p-7" style="transition-delay:.24s">
+        <div class="card-glow"></div>
+        <div class="w-14 h-14 rounded-2xl grid place-items-center text-xl mb-5" style="background:linear-gradient(135deg,rgba(52,211,153,.2),rgba(34,211,238,.2));color:#34d399"><i class="fa-solid fa-building-columns"></i></div>
+        <h3 class="font-display font-semibold text-lg mb-2">Fintech &amp; Payment Copy</h3>
+        <p class="text-sm text-mut leading-relaxed mb-4">Transaction messages, cashback alerts and payment flows — accurate where mistakes actually cost money.</p>
+        <div class="flex flex-wrap gap-2"><span class="chip">Fintech</span><span class="chip">Payments</span><span class="chip">Alerts</span></div>
+      </div>
+
+      <div class="card rv tilt p-7" style="transition-delay:.32s">
+        <div class="card-glow"></div>
+        <div class="w-14 h-14 rounded-2xl grid place-items-center text-xl mb-5" style="background:linear-gradient(135deg,rgba(251,191,36,.2),rgba(244,114,182,.2));color:#fbbf24"><i class="fa-solid fa-robot"></i></div>
+        <h3 class="font-display font-semibold text-lg mb-2">AI-Assisted Pipeline</h3>
+        <p class="text-sm text-mut leading-relaxed mb-4">A triage agent detects the language and routes to English/Urdu specialists, so volume never hurts quality.</p>
+        <div class="flex flex-wrap gap-2"><span class="chip">AI Agents</span><span class="chip">Triage</span><span class="chip">High Volume</span></div>
+      </div>
+
+      <div class="card rv tilt p-7" style="transition-delay:.4s">
+        <div class="card-glow"></div>
+        <div class="w-14 h-14 rounded-2xl grid place-items-center text-xl mb-5" style="background:linear-gradient(135deg,rgba(96,165,250,.2),rgba(129,140,248,.2));color:#60a5fa"><i class="fa-solid fa-book-open"></i></div>
+        <h3 class="font-display font-semibold text-lg mb-2">Proofreading &amp; Glossaries</h3>
+        <p class="text-sm text-mut leading-relaxed mb-4">Term banks, word lists and manual QA so a whole product stays consistent from screen one to screen hundred.</p>
+        <div class="flex flex-wrap gap-2"><span class="chip">QA</span><span class="chip">Terminology</span><span class="chip">Consistency</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="sec">
+  <div class="max-w-7xl mx-auto px-5 md:px-10">
+    <div class="text-center mb-11 rv">
+      <span class="eyebrow">Portfolio</span>
+      <h2 class="h2">My Recent <span class="grad-t">Projects</span></h2>
+      <p class="text-mut mt-4">English to Urdu and Urdu to English work — app localisation, UI copy, terminology tables and glossaries.</p>
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-3 mb-12 rv">
+      <button class="filt on" data-f="all">All Work</button>
+      <button class="filt" data-f="ur2en">Translate into English</button>
+      <button class="filt" data-f="en2ur">Translate into Urdu</button>
+      <button class="filt" data-f="lex">Tables &amp; Terminology</button>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" id="pGrid">
+
+      <!-- 1. TRANSLATION HUB -->
+      <article class="card rv overflow-hidden flex flex-col" data-c="translation en2ur ur2en">
+        <div class="pf">
+          <img src="urdu_english_translation.png" alt="English to Urdu Translation Platform"
+               onerror="this.src='https://placehold.co/600x340/0b1120/22d3ee?text=EN+%E2%87%92+UR+Translator'" />
+          <div class="veil">
+            <div class="flex flex-wrap gap-1.5 mb-1">
+              <span class="chip !text-[10px] !py-1">OpenAI SDK</span><span class="chip !text-[10px] !py-1">Agent Routing</span>
+            </div>
+            <span class="sm-btn"><i class="fa-solid fa-expand"></i> View Work</span>
+          </div>
+        </div>
+        <div class="p-6 flex-1 flex flex-col">
+          <span class="text-brand-3 font-bold text-xs tracking-widest uppercase">Translation</span>
+          <h3 class="font-display font-semibold text-lg mt-2 mb-2">English ⇄ Urdu Translation Platform</h3>
+          <p class="text-sm text-mut leading-relaxed">Bilingual AI translator with automatic language detection. A triage agent identifies the input language and routes it to specialised English or Urdu agents, preserving tone, formatting and meaning in natural output.</p>
+          <div class="flex flex-wrap gap-2 mt-4 pt-1">
+            <span class="chip">AI Translation</span><span class="chip">Language Detection</span><span class="chip">Prompt Eng.</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2. TRANSLATION AXI CASHBACK -->
+      <article class="card rv overflow-hidden flex flex-col" data-c="translation en2ur" style="transition-delay:.06s">
+        <div class="pf">
+          <img src="axi_cashback_english_pure_urdu.png" alt="AXI Cashback Notification — English to Pure Urdu"
+               onerror="this.src='https://placehold.co/600x340/0b1120/818cf8?text=AXI+Cashback+%E2%87%92+UR'" />
+          <div class="veil">
+            <div class="flex flex-wrap gap-1.5 mb-1">
+              <span class="chip !text-[10px] !py-1">Localization</span><span class="chip !text-[10px] !py-1">Fintech Copy</span>
+            </div>
+            <span class="sm-btn"><i class="fa-solid fa-expand"></i> View Work</span>
+          </div>
+        </div>
+        <div class="p-6 flex-1 flex flex-col">
+          <span class="text-brand-3 font-bold text-xs tracking-widest uppercase">Translation</span>
+          <h3 class="font-display font-semibold text-lg mt-2 mb-2">AXI Cashback — English to Pure Urdu</h3>
+          <p class="text-sm text-mut leading-relaxed">Full localisation of a fintech cashback notification into pure, natural Urdu — short, friendly and culturally accurate app copy that reads like it was written in Urdu first, not machine-translated.</p>
+          <div class="flex flex-wrap gap-2 mt-4 pt-1">
+            <span class="chip">Localization</span><span class="chip">Copywriting</span><span class="chip">Fintech</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3. TRANSLATION PAYIT -->
+      <article class="card rv overflow-hidden flex flex-col" data-c="translation en2ur" style="transition-delay:.12s">
+        <div class="pf">
+          <img src="payit_english_urdu.png" alt="PayIt English Urdu Translation"
+               onerror="this.src='https://placehold.co/600x340/0b1120/34d399?text=PayIt+EN+%E2%87%92+UR'" />
+          <div class="veil">
+            <div class="flex flex-wrap gap-1.5 mb-1">
+              <span class="chip !text-[10px] !py-1">Payment App</span><span class="chip !text-[10px] !py-1">UI Strings</span>
+            </div>
+            <span class="sm-btn"><i class="fa-solid fa-expand"></i> View Work</span>
+          </div>
+        </div>
+        <div class="p-6 flex-1 flex flex-col">
+          <span class="text-brand-3 font-bold text-xs tracking-widest uppercase">Translation</span>
+          <h3 class="font-display font-semibold text-lg mt-2 mb-2">PayIt — Payment App EN/UR Translation</h3>
+          <p class="text-sm text-mut leading-relaxed">Side-by-side English and Urdu translation of a digital payment platform's screens and transactional messages, keeping terminology consistent across payments, balances and transfers.</p>
+          <div class="flex flex-wrap gap-2 mt-4 pt-1">
+            <span class="chip">UI/UX Copy</span><span class="chip">Payments</span><span class="chip">Terminology</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4. TRANSLATION BIRTH OF A BOY -->
+      <article class="card rv overflow-hidden flex flex-col" data-c="translation en2ur" style="transition-delay:.18s">
+        <div class="pf">
+          <img src="birth_of_a_boy_english_urdu.png" alt="Birth of a Boy English Urdu Translation"
+               onerror="this.src='https://placehold.co/600x340/0b1120/f472b6?text=EN+%E2%87%92+UR+Article'" />
+          <div class="veil">
+            <div class="flex flex-wrap gap-1.5 mb-1">
+              <span class="chip !text-[10px] !py-1">Long-form</span><span class="chip !text-[10px] !py-1">Editorial</span>
+            </div>
+            <span class="sm-btn"><i class="fa-solid fa-expand"></i> View Work</span>
+          </div>
+        </div>
+        <div class="p-6 flex-1 flex flex-col">
+          <span class="text-brand-3 font-bold text-xs tracking-widest uppercase">Translation</span>
+          <h3 class="font-display font-semibold text-lg mt-2 mb-2">Birth of a Boy — English ⇄ Urdu Editorial</h3>
+          <p class="text-sm text-mut leading-relaxed">Long-form bilingual editorial translated between English and Urdu, balancing literary tone with idiomatic Urdu phrasing and consistent register across the whole piece.</p>
+          <div class="flex flex-wrap gap-2 mt-4 pt-1">
+            <span class="chip">Editorial</span><span class="chip">Tone Matching</span><span class="chip">Proofreading</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5. TRANSLATION SECURITY ALERT -->
+      <article class="card rv overflow-hidden flex flex-col" data-c="translation lex ur2en" style="transition-delay:.24s">
+        <div class="pf">
+          <img src="security_alert_table.png" alt="Security Alert Translation Table"
+               onerror="this.src='https://placehold.co/600x340/0b1120/f59e0b?text=Security+Alert+Table'" />
+          <div class="veil">
+            <div class="flex flex-wrap gap-1.5 mb-1">
+              <span class="chip !text-[10px] !py-1">Structured</span><span class="chip !text-[10px] !py-1">Term Bank</span>
+            </div>
+            <span class="sm-btn"><i class="fa-solid fa-expand"></i> View Work</span>
+          </div>
+        </div>
+        <div class="p-6 flex-1 flex flex-col">
+          <span class="text-brand-3 font-bold text-xs tracking-widest uppercase">Translation</span>
+          <h3 class="font-display font-semibold text-lg mt-2 mb-2">Security Alert — Terminology Table</h3>
+          <p class="text-sm text-mut leading-relaxed">Structured English→Urdu translation table for app security alerts, building a reusable terminology base so every warning reads clearly and consistently.</p>
+          <div class="flex flex-wrap gap-2 mt-4 pt-1">
+            <span class="chip">Structured Data</span><span class="chip">Terminology</span><span class="chip">UX Writing</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 6. TRANSLATION WORD LIST -->
+      <article class="card rv overflow-hidden flex flex-col" data-c="translation lex ur2en" style="transition-delay:.3s">
+        <div class="pf">
+          <img src="word_list_table.png" alt="English Urdu Word List Table"
+               onerror="this.src='https://placehold.co/600x340/0b1120/60a5fa?text=Word+List+Table'" />
+          <div class="veil">
+            <div class="flex flex-wrap gap-1.5 mb-1">
+              <span class="chip !text-[10px] !py-1">Glossary</span><span class="chip !text-[10px] !py-1">Reference</span>
+            </div>
+            <span class="sm-btn"><i class="fa-solid fa-expand"></i> View Work</span>
+          </div>
+        </div>
+        <div class="p-6 flex-1 flex flex-col">
+          <span class="text-brand-3 font-bold text-xs tracking-widest uppercase">Translation</span>
+          <h3 class="font-display font-semibold text-lg mt-2 mb-2">English–Urdu Word List &amp; Glossary</h3>
+          <p class="text-sm text-mut leading-relaxed">A curated bilingual glossary mapping English terms to their correct Urdu equivalents — a reference sheet that speeds up every future translation task and keeps vocabulary aligned.</p>
+          <div class="flex flex-wrap gap-2 mt-4 pt-1">
+            <span class="chip">Glossary</span><span class="chip">Vocabulary</span><span class="chip">Reference</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <p id="empty" class="text-center text-mut mt-10 hidden">No projects in this category yet.</p>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="stack" class="sec">
+  <div class="max-w-7xl mx-auto px-5 md:px-10">
+    <div class="text-center mb-14 rv">
+      <span class="eyebrow">Expertise</span>
+      <h2 class="h2">Skills &amp; <span class="grad-t">Workflow</span></h2>
+      <p class="text-mut mt-4">How I work, and the tools that keep quality consistent.</p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-6">
+      <div class="card p-7 rv">
+        <h3 class="font-display font-semibold text-xl mb-7 flex items-center gap-3"><i class="fa-solid fa-language text-brand"></i> Core Strengths</h3>
+        <div class="space-y-6" id="bars">
+          <div><div class="flex justify-between text-sm mb-2"><span>English &#8594; Urdu Translation</span><span class="text-brand font-semibold">95%</span></div><div class="skill-bar"><i data-w="95"></i></div></div>
+          <div><div class="flex justify-between text-sm mb-2"><span>Urdu &#8594; English Translation</span><span class="text-brand font-semibold">92%</span></div><div class="skill-bar"><i data-w="92"></i></div></div>
+          <div><div class="flex justify-between text-sm mb-2"><span>Native Urdu Tone &amp; Idiom</span><span class="text-brand font-semibold">94%</span></div><div class="skill-bar"><i data-w="94"></i></div></div>
+          <div><div class="flex justify-between text-sm mb-2"><span>App &amp; UI Localisation</span><span class="text-brand font-semibold">88%</span></div><div class="skill-bar"><i data-w="88"></i></div></div>
+          <div><div class="flex justify-between text-sm mb-2"><span>Terminology &amp; Glossaries</span><span class="text-brand font-semibold">90%</span></div><div class="skill-bar"><i data-w="90"></i></div></div>
+          <div><div class="flex justify-between text-sm mb-2"><span>Proofreading &amp; Quality Control</span><span class="text-brand font-semibold">93%</span></div><div class="skill-bar"><i data-w="93"></i></div></div>
+          <div><div class="flex justify-between text-sm mb-2"><span>AI Translation Agents</span><span class="text-brand font-semibold">85%</span></div><div class="skill-bar"><i data-w="85"></i></div></div>
+        </div>
+      </div>
+
+      <div class="card p-7 rv" style="transition-delay:.12s">
+        <h3 class="font-display font-semibold text-xl mb-7 flex items-center gap-3"><i class="fa-solid fa-layer-group text-brand-2"></i> Process &amp; Tools</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <div class="p-4 rounded-xl border border-white/10 bg-white/[.03] hover:border-brand/60 hover:-translate-y-1.5 hover:shadow-glow transition-all text-center">
+            <i class="fa-solid fa-file-lines text-2xl text-brand mb-2"></i><p class="text-xs font-semibold">Source Review</p></div>
+          <div class="p-4 rounded-xl border border-white/10 bg-white/[.03] hover:border-brand/60 hover:-translate-y-1.5 hover:shadow-glow transition-all text-center">
+            <i class="fa-solid fa-user-secret text-2xl text-brand-2 mb-2"></i><p class="text-xs font-semibold">AI Draft</p></div>
+          <div class="p-4 rounded-xl border border-white/10 bg-white/[.03] hover:border-brand/60 hover:-translate-y-1.5 hover:shadow-glow transition-all text-center">
+            <i class="fa-solid fa-pen-nib text-2xl text-brand-3 mb-2"></i><p class="text-xs font-semibold">Human Edit</p></div>
+          <div class="p-4 rounded-xl border border-white/10 bg-white/[.03] hover:border-brand/60 hover:-translate-y-1.5 hover:shadow-glow transition-all text-center">
+            <i class="fa-solid fa-magnifying-glass text-2xl text-emerald-400 mb-2"></i><p class="text-xs font-semibold">Proofread</p></div>
+          <div class="p-4 rounded-xl border border-white/10 bg-white/[.03] hover:border-brand/60 hover:-translate-y-1.5 hover:shadow-glow transition-all text-center">
+            <i class="fa-solid fa-book text-2xl text-purple-400 mb-2"></i><p class="text-xs font-semibold">Term Bank</p></div>
+          <div class="p-4 rounded-xl border border-white/10 bg-white/[.03] hover:border-brand/60 hover:-translate-y-1.5 hover:shadow-glow transition-all text-center">
+            <i class="fa-solid fa-comments text-2xl text-cyan-400 mb-2"></i><p class="text-xs font-semibold">Feedback</p></div>
+        </div>
+
+        <div class="mt-7 pt-6 border-t border-white/10">
+          <h4 class="text-sm font-semibold mb-4">Also Strong In</h4>
+          <div class="flex flex-wrap gap-2">
+            <span class="chip"><i class="fa-solid fa-mobile-screen text-brand"></i> RTL Layouts</span>
+            <span class="chip"><i class="fa-solid fa-building-columns text-brand-2"></i> Fintech Copy</span>
+            <span class="chip"><i class="fa-solid fa-newspaper text-brand-3"></i> Editorial</span>
+            <span class="chip"><i class="fa-solid fa-shield-halved text-emerald-400"></i> Security Alerts</span>
+            <span class="chip"><i class="fa-brands fa-whatsapp text-cyan-400"></i> App Messaging</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section id="journey" class="sec">
+  <div class="max-w-4xl mx-auto px-5 md:px-10">
+    <div class="text-center mb-14 rv">
+      <span class="eyebrow">Journey</span>
+      <h2 class="h2">My <span class="grad-t">Journey</span></h2>
+    </div>
+
+    <div class="relative pl-9 space-y-9">
+      <div class="absolute left-[7px] top-2 bottom-2 w-[2px] bg-gradient-to-b from-cyan-400 via-indigo-400 to-transparent"></div>
+
+      <div class="relative rv"><div class="tl-dot"></div>
+        <div class="card p-6 ml-3">
+          <span class="chip">Now</span>
+          <h3 class="font-display font-semibold text-lg mt-3 mb-1">English&#8596;Urdu Translation Specialist</h3>
+          <p class="text-sm text-mut">Running a full localisation practice — app copy, fintech messaging, technical content and bilingual glossaries for clients in Pakistan and abroad.</p>
+        </div>
+      </div>
+      <div class="relative rv"><div class="tl-dot"></div>
+        <div class="card p-6 ml-3">
+          <span class="chip">2023</span>
+          <h3 class="font-display font-semibold text-lg mt-3 mb-1">Built the AI Translation Pipeline</h3>
+          <p class="text-sm text-mut">Designed a triage agent that detects the source language and routes each job to a dedicated English or Urdu agent — making large volumes consistent without losing the human touch.</p>
+        </div>
+      </div>
+      <div class="relative rv"><div class="tl-dot"></div>
+        <div class="card p-6 ml-3">
+          <span class="chip">2022</span>
+          <h3 class="font-display font-semibold text-lg mt-3 mb-1">Started Localising Apps &amp; Websites</h3>
+          <p class="text-sm text-mut">First paid localisation work: UI strings, notifications and payment flows for small apps, delivered with right-to-left Urdu support.</p>
+        </div>
+      </div>
+      <div class="relative rv"><div class="tl-dot"></div>
+        <div class="card p-6 ml-3">
+          <span class="chip">Beginning</span>
+          <h3 class="font-display font-semibold text-lg mt-3 mb-1">Fluent in Both Worlds</h3>
+          <p class="text-sm text-mut">Grew up moving between Urdu and English every day — which is exactly why machine translations bother me, and why mine don't sound like one.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="sec">
+  <div class="max-w-3xl mx-auto px-5 md:px-10">
+    <div class="text-center mb-12 rv">
+      <span class="eyebrow">FAQ</span>
+      <h2 class="h2">Frequently Asked <span class="grad-t">Questions</span></h2>
+    </div>
+
+    <div class="space-y-3" id="faqWrap">
+      <div class="card px-6 py-5 rv">
+        <button class="faqBtn flex w-full items-center justify-between gap-4 text-left">
+          <span class="font-display font-semibold">Is the Urdu natural, or just word-for-word?</span>
+          <i class="fa-solid fa-plus text-brand faqIcon transition-transform"></i>
+        </button>
+        <div class="acc"><p class="text-sm text-mut leading-relaxed pt-4">Natural. I translate the meaning and the intent, not the sentence structure. A direct literal translation of English often produces stiff, slightly odd Urdu — so I rewrite for the target language while keeping the tone identical.</p></div>
+      </div>
+      <div class="card px-6 py-5 rv">
+        <button class="faqBtn flex w-full items-center justify-between gap-4 text-left">
+          <span class="font-display font-semibold">Do you use AI or Google Translate?</span>
+          <i class="fa-solid fa-plus text-brand faqIcon transition-transform"></i>
+        </button>
+        <div class="acc"><p class="text-sm text-mut leading-relaxed pt-4">I use AI translation agents as a first draft for speed and consistency, then I edit and proofread every line myself. Nothing is delivered straight from a machine — that's the whole point.</p></div>
+      </div>
+      <div class="card px-6 py-5 rv">
+        <button class="faqBtn flex w-full items-center justify-between gap-4 text-left">
+          <span class="font-display font-semibold">Can you localise a whole app?</span>
+          <i class="fa-solid fa-plus text-brand faqIcon transition-transform"></i>
+        </button>
+        <div class="acc"><p class="text-sm text-mut leading-relaxed pt-4">Yes. I can translate UI strings, notifications, error messages, help content and marketing copy, and flag anything that needs a layout change for right-to-left Urdu.</p></div>
+      </div>
+      <div class="card px-6 py-5 rv">
+        <button class="faqBtn flex w-full items-center justify-between gap-4 text-left">
+          <span class="font-display font-semibold">Will terminology stay consistent across files?</span>
+          <i class="fa-solid fa-plus text-brand faqIcon transition-transform"></i>
+        </button>
+        <div class="acc"><p class="text-sm text-mut leading-relaxed pt-4">Yes. I build a shared glossary and term bank at the start of a project, then work from it — so the same word is translated the same way in every file, every time.</p></div>
+      </div>
+      <div class="card px-6 py-5 rv">
+        <button class="faqBtn flex w-full items-center justify-between gap-4 text-left">
+          <span class="font-display font-semibold">How long does a translation take?</span>
+          <i class="fa-solid fa-plus text-brand faqIcon transition-transform"></i>
+        </button>
+        <div class="acc"><p class="text-sm text-mut leading-relaxed pt-4">Short app copy comes back same day; a full localisation is usually a few days depending on word count and file count. You get a timeline before we start, and updates as work progresses.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="sec relative overflow-hidden">
+  <div class="blob" style="width:520px;height:520px;background:#7c3aed;bottom:-220px;left:-140px"></div>
+  <div class="max-w-5xl mx-auto px-5 md:px-10 relative z-10">
+    <div class="text-center mb-12 rv">
+      <span class="eyebrow">Contact</span>
+      <h2 class="h2">Let's Work <span class="grad-t">Together</span></h2>
+      <p class="text-mut mt-4">Have content to translate? Send it over and I'll get back to you within 24 hours.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="card p-7 rv">
+        <h3 class="font-display font-semibold text-lg mb-6">Contact Info</h3>
+        <div class="space-y-4">
+          <a href="mailto:arshmanedu123@gmail.com" target="_blank" rel="noopener" class="flex items-center gap-4 p-4 rounded-xl border border-white/10 bg-white/[.03] hover:border-brand/60 hover:-translate-y-1 hover:shadow-glow transition-all">
+            <div class="w-11 h-11 rounded-xl grid place-items-center text-brand shrink-0" style="background:rgba(34,211,238,.12)"><i class="fa-solid fa-envelope text-xl"></i></div>
+            <div><h4 class="text-sm font-semibold">Email</h4><p class="text-xs text-mut break-all">arshmanedu123@gmail.com</p></div>
+          </a>
+
+          <div class="flex items-center gap-4 p-4 rounded-xl border border-white/10 bg-white/[.03]">
+            <div class="w-11 h-11 rounded-xl grid place-items-center text-brand shrink-0" style="background:rgba(34,211,238,.12)"><i class="fa-solid fa-location-dot text-xl"></i></div>
+            <div><h4 class="text-sm font-semibold">Location</h4><p class="text-xs text-mut">Pakistan · Available worldwide</p></div>
+          </div>
+        </div>
+      </div>
+
+      <form id="cForm" class="card p-7 rv" style="transition-delay:.12s">
+        <h3 class="font-display font-semibold text-lg mb-6">Send Your Content</h3>
+        <div class="space-y-4">
+          <div>
+            <label class="text-xs font-semibold mb-2 block text-mut">Your Name</label>
+            <input required type="text" placeholder="John Doe" class="w-full px-4 py-3 rounded-xl bg-white/[.04] border border-white/10 outline-none focus:border-brand focus:shadow-glow transition-all text-sm" />
+          </div>
+          <div>
+            <label class="text-xs font-semibold mb-2 block text-mut">Email</label>
+            <input required type="email" placeholder="arshmanedu123@gmail.com" class="w-full px-4 py-3 rounded-xl bg-white/[.04] border border-white/10 outline-none focus:border-brand focus:shadow-glow transition-all text-sm" />
+          </div>
+          <div>
+            <label class="text-xs font-semibold mb-2 block text-mut">Content Type</label>
+            <select class="w-full px-4 py-3 rounded-xl bg-white/[.04] border border-white/10 outline-none focus:border-brand focus:shadow-glow transition-all text-sm">
+              <option>App / UI strings</option><option>Website content</option><option>Fintech &amp; payment copy</option><option>Article / editorial</option><option>Something else</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-xs font-semibold mb-2 block text-mut">Message</label>
+            <textarea required rows="4" placeholder="Paste or describe the content you need translated English↔Urdu..." class="w-full px-4 py-3 rounded-xl bg-white/[.04] border border-white/10 outline-none focus:border-brand focus:shadow-glow transition-all text-sm resize-none"></textarea>
+          </div>
+          <button type="submit" class="btn btn-grad w-full justify-center">Send Message <i class="fa-solid fa-paper-plane text-xs"></i></button>
+          <p id="cOk" class="text-center text-sm text-emerald-400 hidden">Got it! I'll reply within 24 hours.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="relative z-10 pb-20">
+  <div class="max-w-7xl mx-auto px-5 md:px-10">
+    <div class="card p-10 md:p-14 text-center relative overflow-hidden rv">
+      <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full" style="background:radial-gradient(circle,rgba(34,211,238,.22),transparent 70%)"></div>
+      <div class="absolute -bottom-24 -left-24 w-72 h-72 rounded-full" style="background:radial-gradient(circle,rgba(244,114,182,.2),transparent 70%)"></div>
+      <div class="relative z-10">
+        <h2 class="h2 mb-4">Ready to Go <span class="grad-t">Bilingual?</span></h2>
+        <p class="text-mut max-w-2xl mx-auto mb-8">From a single paragraph to a full app localisation — let's get your content into Urdu properly.</p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="mailto:arshmanedu123@gmail.com?subject=Translation%20Project%20Enquiry" class="btn btn-grad">Hire Me <i class="fa-solid fa-arrow-right text-xs"></i></a>
+          <a href="#projects" class="btn btn-ghost">See My Work <i class="fa-solid fa-arrow-right text-xs"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="relative z-10 border-t border-white/10 pt-12 pb-8">
+  <div class="max-w-7xl mx-auto px-5 md:px-10">
+    <div class="grid md:grid-cols-4 gap-8 mb-10">
+      <div class="md:col-span-2">
+        <a href="#home" class="flex items-center gap-2.5 mb-4">
+          <span class="brand-dot"></span>
+          <span class="font-display font-extrabold text-lg">Knai<span class="grad-t"> Translations</span></span>
+        </a>
+        <p class="text-sm text-mut leading-relaxed max-w-sm">English&#8596;Urdu translator and localisation specialist — turning content into natural Urdu (and back into clear English) with consistent terminology and a human proofread on every line.</p>
+      </div>
+      <div>
+        <h4 class="font-display font-semibold mb-4">Navigation</h4>
+        <ul class="space-y-2.5 text-sm">
+          <li><a href="#about" class="text-mut hover:text-brand transition">About</a></li>
+          <li><a href="#services" class="text-mut hover:text-brand transition">Services</a></li>
+          <li><a href="#projects" class="text-mut hover:text-brand transition">Projects</a></li>
+          <li><a href="#stack" class="text-mut hover:text-brand transition">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-display font-semibold mb-4">Connect</h4>
+        <ul class="space-y-2.5 text-sm">
+          <li><a href="mailto:arshmanedu123@gmail.com">arshmanedu123@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-xs text-mut">&copy; <span id="yr"></span> Knai Translations. All rights reserved.</p>
+      <div class="flex gap-3">
+        <a href="mailto:arshmanedu123@gmail.com" class="soc !w-10 !h-10" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+      </div>
+      <button id="toTop" class="text-xs text-mut hover:text-brand transition spin-on-hover">Back to top <i class="fa-solid fa-arrow-up"></i></button>
+    </div>
+  </div>
+</footer>
+
+<button id="top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb" role="dialog" aria-modal="true">
+  <button class="lb-x" id="lbX" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+  <button class="lb-n p" id="lbP" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+  <button class="lb-n n" id="lbN" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
+  <img id="lbImg" src="" alt="" />
+  <div class="lb-cap" id="lbCap"></div>
+</div>
+
+<script>
+/* ============ PRELOADER ============ */
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const p = document.getElementById('preloader');
+    p.classList.add('done');
+    setTimeout(() => p.remove(), 700);
+    document.querySelectorAll('.rv,.rv-l,.rv-r,.rv-z').forEach((e,i)=>setTimeout(()=>e.classList.add('in'), i*45));
+  }, 450);
+});
+
+/* ============ CURSOR ============ */
+const cur = document.getElementById('cur'), cdot = document.getElementById('curDot');
+let mx=0,my=0,cx=0,cy=0,dx=0,dy=0;
+window.addEventListener('mousemove', e => {
+  mx=e.clientX; my=e.clientY;
+  dx=e.clientX; dy=e.clientY;
+  const hot = e.target.closest('a,button,.card,input,select,textarea,.tilt');
+  cur.classList.toggle('hot', !!hot);
+});
+(function loop(){
+  cx += (mx-cx)*0.16; cy += (my-cy)*0.16;
+  cur.style.left=cx+'px'; cur.style.top=cy+'px';
+  cdot.style.left=dx+'px'; cdot.style.top=dy+'px';
+  requestAnimationFrame(loop);
+})();
+
+/* ============ STARFIELD ============ */
+(() => {
+  const c = document.getElementById('stars'), x = c.getContext('2d');
+  let P=[], w, h;
+  function size(){ w=c.width=innerWidth; h=c.height=innerHeight;
+    P = Array.from({length: Math.min(120, Math.floor(w*h/16000))}, () => ({
+      x:Math.random()*w, y:Math.random()*h, r:Math.random()*1.5+.3,
+      vx:(Math.random()-.5)*.18, vy:(Math.random()-.5)*.18, a:Math.random()*.6+.25
+    }));
+  }
+  size(); addEventListener('resize', size);
+  (function draw(){
+    x.clearRect(0,0,w,h);
+    P.forEach(p => {
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0||p.x>w) p.vx*=-1;
+      if(p.y<0||p.y>h) p.vy*=-1;
+      x.beginPath(); x.arc(p.x,p.y,p.r,0,6.283);
+      x.fillStyle='rgba(160,200,255,'+p.a+')'; x.fill();
+    });
+    requestAnimationFrame(draw);
+  })();
+})();
+
+/* ============ NAV / SCROLL ============ */
+const nav = document.getElementById('nav'), prog = document.getElementById('prog'), topBtn = document.getElementById('top');
+const sections = [...document.querySelectorAll('section[id]')];
+const links = [...document.querySelectorAll('.navlink')];
+function onScroll(){
+  const y = scrollY;
+  nav.classList.toggle('solid', y > 40);
+  topBtn.classList.toggle('show', y > 600);
+  const h = document.documentElement.scrollHeight - innerHeight;
+  prog.style.width = (h>0 ? (y/h)*100 : 0) + '%';
+  let cur2 = 'home';
+  sections.forEach(s => { if(y >= s.offsetTop - 140) cur2 = s.id; });
+  links.forEach(l => l.classList.toggle('on', l.getAttribute('href') === '#'+cur2));
+}
+addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+/* ============ MOBILE MENU ============ */
+const bg = document.getElementById('burger'), mm = document.getElementById('mMenu');
+function closeMenu(){ bg.classList.remove('open'); mm.style.maxHeight='0'; }
+bg.addEventListener('click', () => {
+  const open = bg.classList.toggle('open');
+  mm.style.maxHeight = open ? mm.scrollHeight + 'px' : '0';
+});
+document.querySelectorAll('.mob-link').forEach(a => a.addEventListener('click', closeMenu));
+
+/* ============ TYPEWRITER ============ */
+(() => {
+  const words = ['English → Urdu Translation','Urdu → English Translation','AI Translation Agents','App & UI Localisation','Fintech & Payment Copy','Technical Terminology','Proofreading & QA'];
+  const el = document.getElementById('tw'), caret = document.querySelector('.tw-caret');
+  let w=0,i=0,del=false;
+  function type(){
+    const word = words[w];
+    el.textContent = word.slice(0, i);
+    caret.style.opacity = 1;
+    let d = del ? 42 : 78;
+    if(!del && i === word.length){
+      del = true; d = 1900;
+    } else if(del && i === 0){
+      del = false; w = (w+1)%words.length; d = 320;
+    } else {
+      i += del ? -1 : 1;
+    }
+    setTimeout(type, d);
+  }
+  type();
+})();
+
+/* ============ SCROLL REVEAL ============ */
+const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }), {threshold:.12, rootMargin:'0px 0px -60px 0px'});
+function observe(){ document.querySelectorAll('.rv:not(.in),.rv-l:not(.in),.rv-r:not(.in),.rv-z:not(.in)').forEach(e => io.observe(e)); }
+observe();
+
+/* ============ COUNTERS ============ */
+const cio = new IntersectionObserver(es => es.forEach(e => {
+  if(!e.isIntersecting) return;
+  const el = e.target, end = +el.dataset.c;
+  if(!Number.isFinite(end)) return;
+  const t0 = performance.now(), dur = 1600;
+  (function run(now){
+    const p = Math.min((now-t0)/dur, 1);
+    el.textContent = '+' + Math.floor((1-Math.pow(1-p,3)) * end);
+    if(p < 1) requestAnimationFrame(run);
+  })(t0);
+  cio.unobserve(el);
+}), {threshold:.5});
+document.querySelectorAll('.stat-n[data-c]').forEach(e => cio.observe(e));
+
+/* ============ SKILL BARS ============ */
+const bio = new IntersectionObserver(es => es.forEach(e => {
+  if(!e.isIntersecting) return;
+  e.target.querySelectorAll('.skill-bar>i').forEach((b,i) => setTimeout(() => b.style.width = b.dataset.w + '%', i*120));
+  bio.unobserve(e.target);
+}), {threshold:.35});
+const barsEl = document.getElementById('bars'); if(barsEl) bio.observe(barsEl);
+
+/* ============ PROJECT FILTERS ============ */
+document.querySelectorAll('.filt').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filt').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    const f = btn.dataset.f;
+    let shown = 0;
+    document.querySelectorAll('#pGrid article').forEach(card => {
+      const cats = card.dataset.c.split(' ');
+      const match = f === 'all' || cats.includes(f);
+      card.classList.toggle('hidden', !match);
+      if(match){
+        shown++;
+        card.classList.remove('in');
+        void card.offsetWidth;
+        setTimeout(() => card.classList.add('in'), 40 + shown*45);
+      }
+    });
+    document.getElementById('empty').classList.toggle('hidden', shown > 0);
+  });
+});
+
+/* ============ TILT + CARD GLOW ============ */
+document.querySelectorAll('[data-tilt], .card').forEach(card => {
+  if(!card.classList.contains('tilt') && !card.querySelector('.pf')) return;
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = e.clientX - r.left - r.width/2;
+    const y = e.clientY - r.top - r.height/2;
+    if(card.classList.contains('tilt')) card.style.transform = `perspective(1000px) rotateX(${-y/22}deg) rotateY(${x/22}deg) translateY(-6px) scale(1.012)`;
+    const g = card.querySelector('.card-glow');
+    if(g){ g.style.left = (x + r.width/2 - 140) + 'px'; g.style.top = (y + r.height/2 - 140) + 'px'; }
+  });
+  card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+});
+
+/* ============ FAQ ============ */
+document.querySelectorAll('.faqBtn').forEach(b => {
+  b.addEventListener('click', () => {
+    const acc = b.nextElementSibling, icon = b.querySelector('.faqIcon');
+    const isOpen = acc.classList.contains('open');
+    document.querySelectorAll('#faqWrap .acc').forEach(a => a.classList.remove('open'));
+    document.querySelectorAll('.faqIcon').forEach(i => i.style.transform = 'rotate(0deg)');
+    if(!isOpen){ acc.classList.add('open'); icon.style.transform = 'rotate(135deg)'; }
+  });
+});
+
+/* ============ FORM ============ */
+document.getElementById('cForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const ok = document.getElementById('cOk');
+  ok.classList.remove('hidden');
+  e.target.reset();
+  setTimeout(() => ok.classList.add('hidden'), 5000);
+});
+
+/* ============ SCROLL PARALAX + TOP BTN ============ */
+topBtn.addEventListener('click', () => scrollTo({top:0, behavior:'smooth'}));
+document.getElementById('toTop').addEventListener('click', () => scrollTo({top:0, behavior:'smooth'}));
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+/* ============ VIDEO AUTOPLAY SAFETY ============ */
+document.querySelectorAll('video').forEach(v => {
+  const p = () => v.play().catch(()=>{});
+  const st = new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? p() : v.pause()), {threshold:.4});
+  st.observe(v);
+});
+
+/* ============ SMOOTH ANCHOR OFFSET ============ */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href');
+    if(id.length < 2) return;
+    const el = document.querySelector(id);
+    if(!el) return;
+    e.preventDefault();
+    scrollTo({top: el.offsetTop - 62, behavior:'smooth'});
+    history.replaceState(null,'',id);
+  });
+});
+
+/* ============ LIGHTBOX (translation work) ============ */
+(() => {
+  const lb = document.getElementById('lb'), img = document.getElementById('lbImg'),
+        cap = document.getElementById('lbCap');
+  const shots = [...document.querySelectorAll('#pGrid article[data-c~="translation"] img')];
+  if(!shots.length) return;
+  let i = 0;
+
+  function show(n){
+    i = (n + shots.length) % shots.length;
+    img.src = shots[i].src;
+    cap.innerHTML = shots[i].alt;
+  }
+  function open(n){ show(n); lb.classList.add('open'); document.body.style.overflow='hidden'; }
+  function close(){ lb.classList.remove('open'); document.body.style.overflow=''; }
+
+  shots.forEach((s, n) => {
+    const card = s.closest('article');
+    const btn  = card ? card.querySelector('.sm-btn') : null;
+    if(btn){
+      btn.setAttribute('role','button'); btn.setAttribute('tabindex','0');
+      btn.addEventListener('click', e => { e.preventDefault(); open(n); });
+      btn.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); open(n); } });
+    }
+  });
+
+  document.getElementById('lbX').addEventListener('click', close);
+  document.getElementById('lbP').addEventListener('click', e => { e.stopPropagation(); show(i-1); });
+  document.getElementById('lbN').addEventListener('click', e => { e.stopPropagation(); show(i+1); });
+  lb.addEventListener('click', e => { if(e.target === lb) close(); });
+  addEventListener('keydown', e => {
+    if(!lb.classList.contains('open')) return;
+    if(e.key === 'Escape') close();
+    if(e.key === 'ArrowLeft') show(i-1);
+    if(e.key === 'ArrowRight') show(i+1);
+  });
+})();
+</script>
+</body>
+</html>
